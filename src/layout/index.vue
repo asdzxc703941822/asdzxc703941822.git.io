@@ -1,15 +1,16 @@
 <template>
-  <el-container>
-    <el-aside width="220px">
+  <el-container style="height:100%;">
+    <el-backtop></el-backtop>
+    <el-aside :width="isCollapse?'64px':'220px'">
       <vuescroll>
         <sidebar :data="menuData" />
       </vuescroll>
     </el-aside>
-    <el-container class="main-container">
+    <el-container :class="[isCollapse?'main-container-collapes':'main-container']">
       <el-header>
         <navbar />
       </el-header>
-      <el-main>
+      <el-main class="main-style">
         <transition name="el-fade-in">
           <router-view></router-view>
         </transition>
@@ -27,31 +28,29 @@ export default {
   data() {
     return {};
   },
-  computed: mapState(["menuData"]),
+  computed: mapState(["menuData", "isCollapse"]),
   components: {
     sidebar,
     navbar,
     vuescroll
   },
   mounted() {
-    console.log(this.$route);
+    // console.log(this.$route);
     // this.$nextTick(() => {
     //   console.log(this.$store.state.routerArray);
     // });
   }
 };
 </script>
-<style lang="scss">
-.el-aside {
+<style lang="scss" scoped>
+/deep/ .el-aside {
   position: fixed;
+  height: 100%;
 }
 .main-container {
   margin-left: 220px;
-  .el-header {
-    padding: 0;
-  }
-  .el-main{
-    padding: 0
-  }
+}
+.main-container-collapes {
+  margin-left: 64px;
 }
 </style>

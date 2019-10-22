@@ -2,69 +2,69 @@ import Mock from "mockjs";
 // import router from "/router";
 const template = {
   data: [
-    {
-      attributes: {
-        ActionName: "null",
-        ControllerName: "null",
-        Params: { path: "/report_three" },
-        url: "report_three.vue"
-      },
-      children: [],
-      id: 1,
-      state: "",
-      text: "仓库看板"
-    },
-    {
-      attributes: { ActionName: null, ControllerName: null, Params: { path: "/report_one" }, url: "report_one" },
-      children: [],
-      id: 1,
-      state: "",
-      text: "装配看板"
-    },
-    {
-      attributes: { ActionName: null, ControllerName: null, Params: { path: "/report_two" }, url: "report_two" },
-      children: [],
-      id: 1,
-      state: "",
-      text: "机加工看板"
-    },
-    {
-      attributes: {
-        ActionName: null,
-        ControllerName: null,
-        Params: { path: "/productionReport" },
-        url: "productionReport/index.vue"
-      },
-      children: [
-        {
-          attributes: {
-            ActionName: null,
-            ControllerName: null,
-            Params: { path: "/productionReport/add" },
-            url: "productionReport/productionReport.vue"
-          },
-          children: [],
-          id: 1,
-          state: "",
-          text: "产量汇报"
-        },
-        {
-          attributes: {
-            ActionName: null,
-            ControllerName: null,
-            Params: { path: "/productionReport/query" },
-            url: "productionReport/taskListQuery.vue"
-          },
-          children: [],
-          id: 1,
-          state: "",
-          text: "任务单查询"
-        }
-      ],
-      id: 1,
-      state: "",
-      text: "产量汇报管理"
-    },
+    // {
+    //   attributes: {
+    //     ActionName: null,
+    //     ControllerName: null,
+    //     Params: { path: "/pickingProRate" },
+    //     url: "pickingProRate"
+    //   },
+    //   children: [],
+    //   id: 1,
+    //   state: "",
+    //   text: "领料进度"
+    // },
+    // {
+    //   attributes: { ActionName: null, ControllerName: null, Params: { path: "/assembleRate" }, url: "assembleRate" },
+    //   children: [],
+    //   id: 1,
+    //   state: "",
+    //   text: "装配进度看板"
+    // },
+    // {
+    //   attributes: { ActionName: null, ControllerName: null, Params: { path: "/machiningRate" }, url: "machiningRate" },
+    //   children: [],
+    //   id: 1,
+    //   state: "",
+    //   text: "机加工看板"
+    // },
+    // {
+    //   attributes: {
+    //     ActionName: null,
+    //     ControllerName: null,
+    //     Params: { path: "/productionReport" },
+    //     url: "productionReport/index.vue"
+    //   },
+    //   children: [
+    //     {
+    //       attributes: {
+    //         ActionName: null,
+    //         ControllerName: null,
+    //         Params: { path: "/productionReport/query" },
+    //         url: "productionReport/taskListQuery.vue"
+    //       },
+    //       children: [],
+    //       id: 1,
+    //       state: "",
+    //       text: "任务单查询"
+    //     },
+    //     {
+    //       attributes: {
+    //         ActionName: null,
+    //         ControllerName: null,
+    //         Params: { path: "/productionReport/add" },
+    //         url: "productionReport/productionReport.vue"
+    //       },
+    //       children: [],
+    //       id: 1,
+    //       state: "",
+    //       text: "产量汇报查询"
+    //     }
+    //   ],
+    //   id: 1,
+    //   state: "",
+    //   text: "产量汇报管理"
+    // },
     {
       attributes: {
         ActionName: null,
@@ -243,4 +243,10 @@ const template = {
 // const template = {
 //   "data|1-3": "fsdjf"
 // };
-Mock.mock("/menue", template);
+let address;
+if (process.env.NODE_ENV === "development") {
+  address = "http://192.168.1.99:53559/";
+} else if (process.env.NODE_ENV === "production") {
+  address = "http://192.168.1.169:8088/";
+}
+Mock.mock(`${address}api/menue`, template);

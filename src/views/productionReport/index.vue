@@ -1,6 +1,5 @@
 <template>
-  <div>
-    245454
+  <div class="page">
     <router-view></router-view>
   </div>
 </template>
