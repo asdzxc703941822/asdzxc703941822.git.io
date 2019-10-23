@@ -4,6 +4,7 @@ function resolve(dir) {
 }
 // 项目的主要配置文件
 module.exports = {
+  publicPath: "/new-discovery/",
   chainWebpack: config => {
     config.resolve.alias
       .set("~@", resolve("src/components/"))
