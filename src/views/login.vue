@@ -25,8 +25,8 @@ export default {
   data() {
     return {
       ruleForm: {
-        account: "",
-        password: ""
+        account: "admin",
+        password: "1"
       },
       rules: {
         account: [{ required: true, message: "账号不能为空", trigger: "blur" }],
@@ -39,26 +39,28 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           let params = `username=${this.ruleForm.account}&password=${this.ruleForm.password}&grant_type=password`;
-          login(params)
-            .then(res => {
-              const { access_token, token_type, expires_in } = res.data;
-              localStorage.setItem(
-                "access_token",
-                `${token_type} ${access_token}`
-              );
-              //获取登录用户
-              getUser().then(res => {
-                let { UserName, UserID } = res;
-                localStorage.setItem("account", UserName);
-                this.$router.replace({ path: "/layout" });
-              });
-            })
-            .catch(error => {
-              this.$message({
-                message: error.response.data.error,
-                type: "warning"
-              });
-            });
+          localStorage.setItem("account", this.ruleForm.account);
+          this.$router.replace({ path: "/layout" });
+          // login(params)
+          //   .then(res => {
+          //     const { access_token, token_type, expires_in } = res.data;
+          //     localStorage.setItem(
+          //       "access_token",
+          //       `${token_type} ${access_token}`
+          //     );
+          //     //获取登录用户
+          //     getUser().then(res => {
+          //       let { UserName, UserID } = res;
+          //       localStorage.setItem("account", UserName);
+          //       this.$router.replace({ path: "/layout" });
+          //     });
+          //   })
+          //   .catch(error => {
+          //     this.$message({
+          //       message: error.response.data.error,
+          //       type: "warning"
+          //     });
+          //   });
         } else {
           console.log("error submit!!");
           return false;
